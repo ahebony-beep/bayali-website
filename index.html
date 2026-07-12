@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="تطبيق بيع لي - السوق السوداني الأول للبيع والشراء بدون وساطة">
+    <meta name="keywords" content="بيع لي, سوق سوداني, بيع, شراء, السودان, marketplace">
+    <meta name="author" content="Ebony Bagera">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="تطبيق بيع لي - السوق السوداني الأول">
+    <meta property="og:description" content="حمّل التطبيق الأول في السودان للبيع والشراء بدون وساطة">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ahebony.github.io/bayali-website">
+    <meta property="og:image" content="https://ahebony.github.io/bayali-website/assets/og-image.png">
+    
+    <title>تطبيق بيع لي | السوق السوداني الأول</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0D9488;
+            --primary-dark: #0F766E;
+            --primary-light: #14B8A6;
+            --secondary: #2563EB;
+            --accent: #F59E0B;
+            --bg-light: #F8FAFC;
+            --bg-dark: #0F172A;
+            --surface-light: #FFFFFF;
+            --surface-dark: #1E293B;
+            --text-light: #1E293B;
+            --text-dark: #F1F5F9;
+            --text-muted-light: #64748B;
+            --text-muted-dark: #94A3B8;
+            --border-light: #E2E8F0;
+            --border-dark: #334155;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --gradient: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
+            --gradient-blue: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        body.dark {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============ Header ============ */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        body.dark header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+
+        body.dark .nav-links a {
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--text-light);
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        body.dark .theme-toggle {
+            color: var(--text-dark);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        body.dark .mobile-menu {
+            color: var(--text-dark);
+        }
+
+        /* ============ Hero Section ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 50px;
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: var(--gradient);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: var(--gradient-blue);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: 20px;
+            color: var(--text-muted-light);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        body.dark .hero-text .subtitle {
+            color: var(--text-muted-dark);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted-light);
+        }
+
+        body.dark .stat-label {
+            color: var(--text-muted-dark);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(13, 148, 136, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--surface-light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        body.dark .btn-secondary {
+            background: var(--surface-dark);
+            color: var(--primary-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: var(--gradient);
+            border-radius: 40px;
+            padding: 15px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--surface-light);
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: var(--primary);
+        }
+
+        body.dark .phone-screen {
+            background: var(--surface-dark);
+        }
+
+        /* ============ Features ============ */
+        .features {
+            padding: 100px 0;
+            background: var(--surface-light);
+        }
+
+        body.dark .features {
+            background: var(--surface-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        body.dark .section-title h2 {
+            color: var(--text-dark);
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--text-muted-light);
+        }
+
+        body.dark .section-title p {
+            color: var(--text-muted-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .feature-card {
+            background: var(--bg-dark);
+            border-color: var(--border-dark);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted-light);
+            font-size: 14px;
+        }
+
+        body.dark .feature-card p {
+            color: var(--text-muted-dark);
+        }
+
+        /* ============ Screenshots ============ */
+        .screenshots {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+
+        body.dark .screenshots {
+            background: var(--bg-dark);
+        }
+
+        .screenshots-slider {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+
+        .screenshots-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshots-slider::-webkit-scrollbar-track {
+            background: var(--border-light);
+            border-radius: 10px;
+        }
+
+        body.dark .screenshots-slider::-webkit-scrollbar-track {
+            background: var(--border-dark);
+        }
+
+        .screenshots-slider::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .screenshot-item {
+            min-width: 250px;
+            height: 500px;
+            background: var(--gradient);
+            border-radius: 30px;
+            scroll-snap-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* ============ Reviews ============ */
+        .reviews {
+            padding: 100px 0;
+            background: var(--surface-light);
+        }
+
+        body.dark .reviews {
+            background: var(--surface-dark);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .review-card {
+            background: var(--bg-dark);
+            border-color: var(--border-dark);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .review-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .review-stars {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .review-text {
+            color: var(--text-muted-light);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        body.dark .review-text {
+            color: var(--text-muted-dark);
+        }
+
+        /* ============ FAQ ============ */
+        .faq {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+
+        body.dark .faq {
+            background: var(--bg-dark);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--surface-light);
+            margin-bottom: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .faq-item {
+            background: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+            color: var(--primary);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            padding: 0 20px;
+            color: var(--text-muted-light);
+        }
+
+        body.dark .faq-answer {
+            color: var(--text-muted-dark);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 20px 20px;
+        }
+
+        /* ============ Download CTA ============ */
+        .download-cta {
+            padding: 100px 0;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .download-cta h2 {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .download-cta p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ============ Footer ============ */
+        footer {
+            background: var(--surface-light);
+            padding: 60px 0 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        body.dark footer {
+            background: var(--surface-dark);
+            border-top: 1px solid var(--border-dark);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted-light);
+            margin-bottom: 20px;
+        }
+
+        body.dark .footer-brand p {
+            color: var(--text-muted-dark);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        body.dark .social-links a {
+            background: var(--bg-dark);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        body.dark .footer-links a {
+            color: var(--text-muted-dark);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-muted-light);
+            font-size: 14px;
+        }
+
+        body.dark .footer-bottom {
+            border-top: 1px solid var(--border-dark);
+            color: var(--text-muted-dark);
+        }
+
+        /* ============ Responsive ============ */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .phone-mockup {
+                width: 250px;
+                height: 500px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: var(--surface-light);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+            }
+
+            body.dark .nav-links {
+                background: var(--surface-dark);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 28px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============ Animations ============ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <span>بيع لي</span>
+            </a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#features">المميزات</a></li>
+                <li><a href="#screenshots">الصور</a></li>
+                <li><a href="#reviews">التقييمات</a></li>
+                <li><a href="#faq">الأسئلة</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+            
+            <button class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>السوق السوداني الأول للبيع والشراء</h1>
+                    <p class="subtitle">
+                        حمّل تطبيق "بيع لي" وابدأ رحلتك في عالم التجارة الإلكترونية 
+                        بدون وساطة. بيع واشترِ بسهولة وأمان.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">10K+</div>
+                            <div class="stat-label">تحميل</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.8</div>
+                            <div class="stat-label">تقييم</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5K+</div>
+                            <div class="stat-label">مستخدم</div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <a href="assets/bayali.apk" download class="btn btn-primary">
+                            <i class="fab fa-android"></i>
+                            تحميل APK
+                        </a>
+                        <a href="#features" class="btn btn-secondary">
+                            <i class="fas fa-info-circle"></i>
+                            اعرف المزيد
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>مميزات التطبيق</h2>
+                <p>كل ما تحتاجه لتجارة إلكترونية ناجحة</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>سرعة فائقة</h3>
+                    <p>تصفح ونشر الإعلانات بسرعة كبيرة مع واجهة سلسة</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>بحث متقدم</h3>
+                    <p>ابحث عن المنتجات بسهولة مع فلاتر متعددة</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>واتساب مباشر</h3>
+                    <p>تواصل مع البائعين مباشرة عبر واتساب</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>محادثات فورية</h3>
+                    <p>نظام محادثات متكامل داخل التطبيق</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>إشعارات فورية</h3>
+                    <p>احصل على إشعارات عند وجود جديد</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>نظام تقييم</h3>
+                    <p>قيّم البائعين واختر الأفضل</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>المفضلة</h3>
+                    <p>احفظ منتجاتك المفضلة للرجوع إليها</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>الوضع الداكن</h3>
+                    <p>دعم كامل للوضع الداكن لراحة العين</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>لقطات من التطبيق</h2>
+                <p>شاهد كيف يبدو تطبيق بيع لي</p>
+            </div>
+            
+            <div class="screenshots-slider">
+                <div class="screenshot-item">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="screenshot-item">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="screenshot-item">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="screenshot-item">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="screenshot-item">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="screenshot-item">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>ماذا يقول المستخدمون</h2>
+                <p>تقييمات حقيقية من مستخدمينا</p>
+            </div>
+            
+            <div class="reviews-grid">
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-avatar">أ</div>
+                        <div class="review-info">
+                            <h4>أحمد محمد</h4>
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="review-text">
+                        تطبيق رائع وسهل الاستخدام! تمكنت من بيع منتجاتي بسهولة 
+                        والتواصل مع المشترين مباشرة. أنصح به بشدة.
+                    </p>
+                </div>
+                
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-avatar">س</div>
+                        <div class="review-info">
+                            <h4>سارة علي</h4>
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="review-text">
+                        أفضل تطبيق سوداني للتجارة الإلكترونية! واجهة جميلة 
+                        ومميزات رائعة. شكراً لفريق التطوير.
+                    </p>
+                </div>
+                
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-avatar">م</div>
+                        <div class="review-info">
+                            <h4>محمد عبدالله</h4>
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="review-text">
+                        تطبيق ممتاز وسريع! البحث يعمل بشكل رائع والإشعارات 
+                        فورية. أنصح الجميع بتجربته.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>الأسئلة الشائعة</h2>
+                <p>إجابات على أكثر الأسئلة شيوعاً</p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل التطبيق مجاني؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        نعم، التطبيق مجاني تماماً ولا توجد أي رسوم مخفية. 
+                        يمكنك التحميل والاستخدام بدون أي تكلفة.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>كيف أنشر إعلاناً؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        بعد تسجيل الدخول، اضغط على زر "إضافة إعلان" في الصفحة 
+                        الرئيسية، ثم املأ البيانات وارفع الصور.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل يمكنني التواصل مع البائع مباشرة؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        نعم! يمكنك التواصل مع البائع عبر واتساب مباشرة أو 
+                        من خلال نظام المحادثات داخل التطبيق.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل التطبيق آمن؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        نعم، التطبيق يستخدم أحدث تقنيات الأمان لحماية بياناتك. 
+                        كما يمكنك تقييم البائعين للتأكد من مصداقيتهم.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>كيف أحصل على الدعم الفني؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        يمكنك التواصل معنا عبر البريد الإلكتروني: ahebony@gmail.com 
+                        أو من خلال قسم الدعم داخل التطبيق.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download CTA -->
+    <section class="download-cta">
+        <div class="container">
+            <h2>جاهز لبدء رحلتك؟</h2>
+            <p>حمّل التطبيق الآن وانضم إلى آلاف المستخدمين</p>
+            <a href="assets/bayali.apk" download class="btn-white">
+                <i class="fab fa-android"></i>
+                تحميل APK مجاناً
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>بيع لي</h3>
+                    <p>السوق السوداني الأول للبيع والشراء بدون وساطة</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#features">المميزات</a></li>
+                        <li><a href="#screenshots">الصور</a></li>
+                        <li><a href="#reviews">التقييمات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>الدعم</h4>
+                    <ul>
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
+                        <li><a href="mailto:ahebony@gmail.com">تواصل معنا</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">الشروط والأحكام</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>تواصل معنا</h4>
+                    <ul>
+                        <li><a href="mailto:ahebony@gmail.com">
+                            <i class="fas fa-envelope"></i> ahebony@gmail.com
+                        </a></li>
+                        <li><a href="#">
+                            <i class="fas fa-phone"></i> +249 123 456 789
+                        </a></li>
+                        <li><a href="#">
+                            <i class="fas fa-map-marker-alt"></i> السودان
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 تطبيق بيع لي - جميع الحقوق محفوظة | صُنع بـ ❤️ في السودان</p>
+                <p>تطوير: Ebony Bagera</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            
+            if (document.body.classList.contains('dark')) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Mobile Menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
